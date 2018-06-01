@@ -1,0 +1,56 @@
+using UnityEngine;
+using System.Collections;
+
+public class Pause : CarScript 
+{   
+	bool menuOpen = false;
+	// Use this for initialization
+	void Start () 
+	{
+		if (gameObject.name == "Main Menu")
+		{
+			renderer.enabled = false;
+		}
+	}
+	
+	// Update is called once per frame
+	void Update () 
+	{
+		//Follow the cammera
+		Vector3 PlayerPOS = GameObject.Find("Main Menu").transform.transform.position;
+		//Get the position of the camera then translate to the front so you can see the score at all times
+		float camPosY = getPosition("y") ;
+		PlayerPOS.y = camPosY + 25.78811f;
+		float camPosZ = getPosition("z");
+		PlayerPOS.z = camPosZ - 89.52394f;
+		float camPosX = getPosition ("x");
+		PlayerPOS.x = camPosX - 105.27775f;
+		
+		//Translate the position
+		GameObject.Find("Main Menu").transform.position = new Vector3(PlayerPOS.x, PlayerPOS.y  , PlayerPOS.z );
+
+		//If m is clicked bring up a main menu
+		if (Input.GetKey (KeyCode.M)) 
+		{
+			//Toggle Menu
+			if (menuOpen == false)
+			{
+				Time.timeScale = 0;
+				menuOpen = true;
+
+				if (gameObject.name == "Main Menu")
+				{
+					//If main menu shows up make this visible
+					renderer.enabled = true;
+				}
+			}
+			else 
+			{
+				Time.timeScale = 1;
+				menuOpen = false;
+				renderer.enabled = false;
+				//PauseGUI.enabled = false;
+			}
+		}
+	}
+}

@@ -1,0 +1,194 @@
+//Car Script
+//This class contains the code for the car's driving getting speed, rotation giving
+//the camera an acurate updated location, and health.
+//ICS4U-01
+//Steven Stapleton
+
+using UnityEngine;
+using System.Collections;
+
+public class CarScript : MonoBehaviour
+{
+		//Global variables 
+		//Create function to get speed
+		protected int speed;
+		//Constants
+		const int damage = 5;
+		int health = 20;
+		float score = 0.0f;
+		float totalTime = 0.0f;
+	    string carName = "Ferrari";
+
+	//Constructor
+	void initVariables()
+		{
+				//resetting variable values
+				health = 20;
+				score = 0.0f;
+				totalTime = 0.0f;
+		}
+		//Test 
+		public void SelectCar ()
+		{
+		//Hide other cars not in use
+				if (speed == 20) {
+			carName = "Ferrari";
+			if (gameObject.name != ("Ferrari")) {
+								//Make the ferrari visible and hide all other cars
+								transform.Translate (0.0f, -2000.0f, 0.0f);
+				              
+			}
+		} else if (speed == 15) {
+			carName = "BMW";
+			//Make the BMW visible and hide all other cars
+						if (gameObject.name != ("BMW")) {
+								//Make the BMW visible
+								transform.Translate (0.0f, -2000.0f, 0.0f);
+						}
+				} 
+		      else if (speed == 14) 
+		        {
+			carName = "Opel";
+			//Make the opel visible
+			if (gameObject.name != ("Opel"))
+			{
+				transform.Translate (0.0f, -2000.0f, 0.0f);
+			}
+		}
+		
+	}
+
+		public void Rotation (float direction)
+		{
+		        //Instance to use function from camera
+		        Camera rotateCam = new Camera ();
+		        
+		        //Rotate Camera
+		         //rotateCam.rotation (direction);
+
+		        //Rotate Car
+				if (gameObject.name != ("ScoreBoard")) 
+		        {
+						Quaternion newRotation = new Quaternion (transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w);
+						newRotation *= Quaternion.Euler (0, (float)6.2 * direction, 0); // this add a 3 degrees Y rotation
+						transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, 12 * Time.deltaTime);
+				}
+		}
+
+		//Detect if the car hit a tree
+		void OnCollisionEnter (Collision aCollision)
+		{
+				//If the car hits a tree
+				if (aCollision.gameObject.name == "Palm") {
+						health = health - damage;
+				}
+		}
+
+
+		/// Takes the away health when you hit a tree.
+
+		public void Moving ()
+		{
+				//Car will only be able to rotate while moving
+				if (Input.GetKey (KeyCode.RightArrow)) {
+						Rotation (1.0f);		
+				}
+				if (Input.GetKey (KeyCode.LeftArrow)) {
+						Rotation (-1.0f);		
+				}
+				if (gameObject.name != ("ScoreBoard")) {
+
+						float inputHorizontal;
+						float inputZaxis;
+
+						inputHorizontal = Input.GetAxis ("Horizontal") * speed;
+						inputZaxis = Input.GetAxis ("Vertical") * speed;
+		
+						inputHorizontal *= Time.deltaTime;
+						inputZaxis *= Time.deltaTime;
+						if (gameObject.name == "BMW") {
+								transform.Translate (0.0F, 0.0f, -inputHorizontal);
+								transform.Translate (-inputZaxis, 0.0f, 0.0F);
+						} else if (gameObject.name == ("Ferrari") || gameObject.name == ("Opel")) {
+								transform.Translate (inputHorizontal, 0.0f, 0.0f);
+								transform.Translate (0.0f, 0.0f, inputZaxis);
+						}
+				}
+		}
+		//Use this for initialization
+		void Start ()
+		{
+		        initVariables ();
+
+				speed = PlayerPrefs.GetInt ("CSpeed");
+				SelectCar ();
+			
+				//speed = CarSpeed.Ferrari;
+				transform.Translate (10.927027f, 0.729425f, 4.89428f);
+				
+		//ADT
+//		ScoreBoard speedC = new ScoreBoard();
+//		ScoreBoard.Abstract speed
+		//speedC.Abstract
+				//speed = CarSpeed.Ferrari;
+
+		}
+	    
+	//return position so score board follow 
+	public float getPosition(string cord)
+	{
+		//record the car that is being used
+		//Debug.Log (gameObject.name);
+
+		//carName = gameObject.name;
+		Vector3 PlayerPOS = GameObject.Find(carName).transform.transform.position;
+		if (cord == "x") {
+			//Debug.Log ("X POS - "+ PlayerPOS.x);
+			//return x value
+			return PlayerPOS.x;
+		}
+		//return y value
+		else if (cord == "y") {
+			return PlayerPOS.y;
+		}
+		//return z value
+		else 
+		{
+			return PlayerPOS.z;
+		}
+	}
+
+		// Update is called once per frame
+		void Update ()
+		{
+				if (gameObject.name == ("ScoreBoard")) {
+						//Debug.Log ("Timer");
+						score = totalTime;
+						TextMesh scoreBoards = (TextMesh)GetComponent (typeof(TextMesh));
+						scoreBoards.text = "Your TIME is" + totalTime.ToString ();
+				}
+
+				if (Input.GetKey (KeyCode.UpArrow)) 
+		        {
+						Moving ();
+				}
+				if (Input.GetKey (KeyCode.DownArrow)) 
+		          {
+						Moving ();
+				}
+				totalTime += Time.deltaTime;
+				//Debug.Log (totalTime);
+			
+
+				if (health == 0 || health < 0) {
+			PlayerPrefs.SetFloat ("Time", totalTime);
+
+			//Functions died = gameObject.GetComponent<Functions>()
+				Functions died = new Functions();
+				died.DisplayScore();
+						//StartCoroutine (DisplayScore ());
+				}
+		}
+
+	
+}

@@ -1,0 +1,78 @@
+//Loading
+//This class will give all the different cars their properties and send them to classes
+//as needed.
+//ICS4U-01
+//Steven Stapleton
+
+using UnityEngine;
+using System.Collections;
+
+public class Loading : Camera
+{
+	//enum for car selection & speed
+	public enum CarSpeed
+	{
+		BMW = 15,
+		Ferrari = 20,
+		Opel = 14
+	}
+	//Check if a car was selected if not use the default car
+	bool checkSpeed = false;
+    private int speed = 20;
+	float totalTime = 0.0f;
+
+	//Get functions to use enum and variables
+	public int getSpeed()
+	{
+		return speed;
+	}
+	
+
+
+	public int getCarSpeed(int index)
+	{
+		 checkSpeed = true;
+		if (index == 1) {
+						speed = (int)CarSpeed.Ferrari;
+		            	PlayerPrefs.DeleteAll();
+			            PlayerPrefs.SetInt("CSpeed", speed);
+						return speed;
+				} else if (index == 2) {
+			            PlayerPrefs.DeleteAll();
+			            PlayerPrefs.SetInt("CSpeed", speed);
+						speed = (int)CarSpeed.BMW;
+						return speed;
+				} else if (index == 3) {
+						speed = (int)CarSpeed.Opel;
+			            PlayerPrefs.DeleteAll();
+			            PlayerPrefs.SetInt("CSpeed", speed);
+						return speed;
+				} else {
+				}
+		//incase index doesnt match a car
+		return 20;
+	}
+
+
+	// Use this for initialization
+	void Start () 
+	{
+		//CarSelection CarDefault = new CarSelection();
+		//car = "Ferrari";
+		if (checkSpeed == false) {
+						speed = (int)CarSpeed.Ferrari;
+						PlayerPrefs.DeleteAll ();
+						PlayerPrefs.SetInt ("CSpeed", speed);
+				}
+	}
+	
+	// Update is called once per frame
+	void Update () 
+	{
+		totalTime += Time.deltaTime;
+		if (totalTime == 2 || totalTime > 2) 
+		{
+				Application.LoadLevel ("MainMenu");
+		}
+	}
+}

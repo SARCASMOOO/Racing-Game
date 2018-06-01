@@ -1,0 +1,37 @@
+//Car Selection Scrolling 
+//This class will give some animation when picking a car
+//ICS4U-01
+//Steven Stapleton
+
+using UnityEngine;
+using System.Collections;
+
+public class CarSelectionScrolling : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () 
+	{
+	     
+	}
+	public void MoveCars()
+	{
+		//When a car is selected
+		if (gameObject.name == "Ferrari") {
+
+		} else if (gameObject.name == "BMW") {
+
+		} else if (gameObject.name == "Opel") {
+
+		}
+	}
+	// Update is called once per frame
+	void Update () 
+	{
+	
+	}
+	void OnMouseDown()
+	{
+		//Move the car when they are clicked
+		MoveCars();
+	}
+}

@@ -1,0 +1,77 @@
+//Car Selection
+//This class will let a player pick a car and send the max speed car type and properties to
+// other classes like the car script.
+//ICS4U-01
+//Steven Stapleton
+
+using UnityEngine;
+using System.Collections;
+
+
+public class CarSelection : MonoBehaviour
+{
+	//string car = "Select a Car";
+	int speed;
+	void OnMouseDown()
+	{
+		Loading carLoading = new Loading ();
+		//Check which car was clicked
+				
+	     	if (gameObject.name == "Ferrari")
+		{
+				do
+			{
+				//car = "Ferrari";
+				speed = carLoading.getCarSpeed(1);
+			PlayerPrefs.DeleteAll();
+			PlayerPrefs.SetInt("CSpeed", speed);
+			}
+			while(speed != 20);
+
+	}
+		  else if (gameObject.name == "BMW")
+		{
+			//car = "BMW";
+			do
+			{
+				speed = carLoading.getCarSpeed(2);
+			PlayerPrefs.DeleteAll();
+			PlayerPrefs.SetInt("CSpeed", speed);
+			}
+			while(speed !=15);
+			
+			}
+		else if (gameObject.name == "Opel")
+		{
+			//car = "Opel";
+			do
+			{
+				speed = carLoading.getCarSpeed(3);
+				PlayerPrefs.DeleteAll();
+				PlayerPrefs.SetInt("CSpeed", speed);
+				Debug.Log("Opel Selected");
+			}
+			while(speed !=14);
+			
+		}
+		//If you click a car it will automaticly go to main menu
+		Application.LoadLevel ("LevelSelect");
+	}
+
+	void Start () 
+	{
+
+	}
+	
+	// Update is called once per frame
+
+	void Update () 
+	{
+	    //if (gameObject.name == "CarName") {
+						//TextMesh scoreBoards = (TextMesh)GetComponent (typeof(TextMesh));
+						//scoreBoards.text = car;
+		//		}
+
+
+	}
+}

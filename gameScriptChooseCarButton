@@ -1,0 +1,35 @@
+//Choose Car buttoon
+//This class will animate buttons and change scenes as needed
+//ICS4U-01
+//Steven Stapleton
+
+using UnityEngine;
+using System.Collections;
+
+public class StartGameScript : MonoBehaviour 
+{
+
+	// Use this for initialization
+	void Start () 
+	{
+
+	}
+	//Change color of button
+	void OnMouseEnter()
+	{
+		renderer.material.color = Color.red;
+	}
+	void OnMouseExit()
+	{
+		renderer.material.color = Color.white;
+	}
+	void OnMouseDown()
+	{
+		Application.LoadLevel ("CSpeed");
+	}
+
+	// Update is called once per frame
+	void Update ()
+	{
+	}
+}

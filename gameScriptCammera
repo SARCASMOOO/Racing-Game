@@ -1,0 +1,48 @@
+using UnityEngine;
+using System.Collections;
+
+public class Camera : MonoBehaviour 
+{
+	int speed;
+	// Use this for initialization
+	void Start () 
+	{
+		speed = PlayerPrefs.GetInt ("CSpeed");
+	}
+
+	// Update is called once per frame
+	void Update () 
+	{
+		//Make Camera follow object
+		int DistanceAway = 10;
+		if(speed == 20) 
+		{
+		Vector3 PlayerPOS = GameObject.Find("Ferrari").transform.transform.position;
+			PlayerPOS.y = PlayerPOS.y + 6;
+			PlayerPOS.z = PlayerPOS.z + 8;
+			PlayerPOS.x = PlayerPOS.x + 9.44f;
+			
+			GameObject.Find("Main Camera").transform.position = new Vector3(PlayerPOS.x, PlayerPOS.y, PlayerPOS.z - DistanceAway);
+		}
+
+		 if(speed == 15) 
+		{
+			Vector3 PlayerPOS = GameObject.Find("BMW").transform.transform.position;
+			PlayerPOS.y = PlayerPOS.y + 6;
+			PlayerPOS.z = PlayerPOS.z + 8;
+			PlayerPOS.x = PlayerPOS.x + 9.44f;
+			
+			GameObject.Find("Main Camera").transform.position = new Vector3(PlayerPOS.x, PlayerPOS.y, PlayerPOS.z - DistanceAway);
+		}
+
+		if (speed == 14) 
+		{
+			Vector3 PlayerPOS = GameObject.Find("Opel").transform.transform.position;
+			PlayerPOS.y = PlayerPOS.y + 6;
+			PlayerPOS.z = PlayerPOS.z + 8;
+			PlayerPOS.x = PlayerPOS.x + 9.44f;
+			
+			GameObject.Find("Main Camera").transform.position = new Vector3(PlayerPOS.x, PlayerPOS.y, PlayerPOS.z - DistanceAway);
+		}
+	}
+}

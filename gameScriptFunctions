@@ -1,0 +1,29 @@
+//Functions
+//This class will be used when the user has lost and the car script says you're out of health
+//ICS4U-01
+//Steven Stapleton
+
+using UnityEngine;
+using System.Collections;
+
+public class Functions : MonoBehaviour {
+	//Method
+	public  void  DisplayScore ()
+	{
+		//Wait for 5 secconds to show user their score 
+
+		//Switch to the lost screen
+		Application.LoadLevel ("LostScene");
+	}
+	// Use this for initialization
+	void Start () 
+	{
+	
+	}
+	
+	// Update is called once per frame
+	void Update () 
+	{
+	
+	}
+}

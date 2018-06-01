@@ -1,0 +1,48 @@
+//Acceleration
+//This class will give some acceleration to the speed of the car
+//ICS4U-01
+//Steven Stapleton
+
+using UnityEngine;
+using System.Collections;
+
+public class Accelarator : MonoBehaviour {
+		
+		int speed = 0;
+		int maxSpeed = 20;
+		int acceleration = 5;
+		int timerCounter = 0;
+	    int[] recSpeed = new int[1];
+		// Use this for initialization
+		void Start () {
+			
+			speed = 0;
+			
+		}
+		
+		// Update is called once per frame
+		void Update () {
+			
+			Acclerate ();
+			
+		}
+		
+		public int Acclerate()
+	    {
+			
+			if (timerCounter < 5) {
+				
+				timerCounter +=(int) Time.deltaTime;
+				
+			}
+			else {
+			    recSpeed[1] = maxSpeed;
+			    speed = recSpeed[1];
+			}
+			
+			speed *=(int) Time.deltaTime;
+			return timerCounter;
+		}
+	
+
+}

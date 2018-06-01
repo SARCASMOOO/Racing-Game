@@ -1,0 +1,57 @@
+//Start Script
+//This class is used for all buttons to switch scenes.
+//ICS4U-01
+//Steven Stapleton
+
+using UnityEngine;
+using System.Collections;
+
+public class StartScript : MonoBehaviour 
+{
+
+	// Use this for initialization
+	void Start () 
+	{
+
+	}
+	void OnMouseEnter()
+	{
+
+		renderer.material.color = Color.red;
+	}
+	void OnMouseExit()
+	{
+		renderer.material.color = Color.white;
+	}
+	void OnMouseDown()
+	{
+		//Check which object is using this script to change the frame properly
+		if (gameObject.name == "MainMenu") {
+						Application.LoadLevel ("MainMenu");
+				} else if (gameObject.name == "Start Game") {
+						Application.LoadLevel ("LevelSelect");
+				} else if (gameObject.name == "Day level") {
+						Application.LoadLevel ("DayScene");
+				} else if (gameObject.name == "Night level") {
+						Application.LoadLevel ("Dusk Level");
+				} else if (gameObject.name == "Exit Game") {
+						Debug.Log ("Quit");
+						Application.Quit ();
+				} else if (gameObject.name == "Choose Car") {
+						Application.LoadLevel ("ChooseCar");
+				} else if (gameObject.name == "New Text") {
+						Application.LoadLevel ("MainMenu");
+				} else if (gameObject.name == "btnBack") {
+			            Application.LoadLevel ("MainMenu");
+				}
+		renderer.material.color = Color.white;
+	}
+	// Update is called once per frame
+	void Update ()
+	{
+//		if (GUI.Button(new Rect(30, 70, 50, 30), "Click"))
+//		{
+//			renderer.material.color = Color.red; 
+//		}
+	}
+}

@@ -1,0 +1,56 @@
+//ScoreBoard
+//This class will have the scoreboard follow you and also request an updated position
+//ICS4U-01
+//Steven Stapleton
+
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+public class ScoreBoard : MonoBehaviour 
+{
+	//Global
+
+	//List
+	public List<float> myList = new List<float>();
+
+	float DistanceAway;
+	public struct Abstract
+	{
+		//bool menu = false;
+	} 
+
+	//Constructor
+	ScoreBoard()
+	{
+		myList.Add (10.0f);
+		DistanceAway = 10.0f;
+	}
+	// Use this for initialization
+	void Start ()
+	{
+
+	}
+	
+	// Update is called once per frame
+	void Update ()
+	{
+		 CarScript follow = new CarScript();
+		//Get the position of the camera and translate to position score infront of user CarScript follow = new CarScript();
+		follow.getPosition ("x");
+
+
+
+		Vector3 PlayerPOS = GameObject.Find("ScoreBoard").transform.transform.position;
+		//Get the position of the camera then translate to the front so you can see the score at all times
+		float camPosY = follow.getPosition("y") ;
+		PlayerPOS.y = camPosY + 25.78811f;
+		float camPosZ = follow.getPosition("z");
+		PlayerPOS.z = camPosZ - 89.52394f;
+		float camPosX = follow.getPosition ("x");
+		PlayerPOS.x = camPosX - 105.27775f;
+
+		//Translate the position
+		GameObject.Find("ScoreBoard").transform.position = new Vector3(PlayerPOS.x, PlayerPOS.y  , PlayerPOS.z );
+	}
+}
